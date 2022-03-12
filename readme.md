@@ -49,3 +49,9 @@ packages:
     emit_exact_table_names: false
 ```
 编写query sql, 运行sqlc generate
+## 单元测试
+测试的入口是TestMain, database/sql提供操作接口
+```bash
+go get -u github.com/lib/pq
+go get -u github.com/strechr/testify
+```
