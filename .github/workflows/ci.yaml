@@ -15,6 +15,8 @@ jobs:
     services:
       postgres:
         image: postgres:alpine
+        ports:
+          - 5432:5432
         env:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: 123456
@@ -37,6 +39,12 @@ jobs:
 
       - name: Run migrations
         run: make migrateup
+
+      - name: Install golang-migrate
+        run: |
+        curl -L https://github.com/golang-migrate/migrate/releases/download/v4.15.1/migrate.linux-amd64.tar.gz | tar xvz
+        sudo mv migrate /usr/bin/migrate
+        which migrate
 
       - name: Test
         run: make test
