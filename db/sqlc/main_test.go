@@ -14,6 +14,7 @@ const (
 )
 
 var testQueries *Queries
+var testStore *Store
 
 func TestMain(m *testing.M) {
 
@@ -21,6 +22,7 @@ func TestMain(m *testing.M) {
 	if err != nil {
 		log.Fatalf("conect database fail with error %v", err)
 	}
-	testQueries = New(conn)
+	testStore = NewStore(conn)
+	testQueries = testStore.Queries
 	os.Exit(m.Run())
 }
