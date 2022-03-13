@@ -146,6 +146,8 @@ set session transaction isolation level read uncommitted | read committted | rep
 postgres read uncommitted 不可脏读
 postgres repeatable read 可以同时插入相同行
 postgres 使用依赖关系检查冲突，避免重复新增，mysql 使用锁机制
+## GitHub Actions
+现在的github的仓库名称为main
 
 
  
