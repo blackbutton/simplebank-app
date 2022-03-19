@@ -162,6 +162,10 @@ HTTP路由
 ```bash
 go get -u github.com/gin-gonic/gin
 ```
+## 配置
+```bash
+go get github.com/spf13/viper
+```
 
 
  
