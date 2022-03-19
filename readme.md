@@ -166,6 +166,12 @@ go get -u github.com/gin-gonic/gin
 ```bash
 go get github.com/spf13/viper
 ```
+## 模拟
+```bash
+go get github.com/golang/mock/mockgen@v1.6.0
+# mockgen [包名] [接口]
+mockgen --destination db/mock/store.go simplebank-app/db/sqlc Store
+```
 
 
  
