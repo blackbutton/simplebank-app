@@ -52,6 +52,7 @@ packages:
 ## 单元测试
 测试的入口是TestMain, database/sql提供操作接口
 ```bash
+go test simplebank-app/util -v -run TestPassword
 go get -u github.com/lib/pq
 go get -u github.com/strechr/testify
 ```
@@ -173,6 +174,8 @@ go get github.com/golang/mock/mockgen@v1.6.0
 mockgen --destination db/mock/store.go simplebank-app/db/sqlc Store
 ```
 ## 添加Users表
+## 哈希
+bcrypt 相同加密产生hash会不一致，加入随机salt，但是hash保存有salt
 
 
  
