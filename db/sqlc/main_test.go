@@ -9,8 +9,8 @@ import (
 	"testing"
 )
 
-var testQueries *Queries
-var testStore *Store
+var testQueries Querier
+var testStore Store
 
 func TestMain(m *testing.M) {
 	config, err := util.LoadConfig("../..")
@@ -22,6 +22,6 @@ func TestMain(m *testing.M) {
 		log.Fatalf("conect database fail with error %v", err)
 	}
 	testStore = NewStore(conn)
-	testQueries = testStore.Queries
+	testQueries = testStore
 	os.Exit(m.Run())
 }
