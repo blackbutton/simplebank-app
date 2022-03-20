@@ -172,6 +172,7 @@ go get github.com/golang/mock/mockgen@v1.6.0
 # mockgen [包名] [接口]
 mockgen --destination db/mock/store.go simplebank-app/db/sqlc Store
 ```
+## 添加Users表
 
 
  
