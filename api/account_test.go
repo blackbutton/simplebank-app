@@ -92,7 +92,7 @@ func TestGetAccount(t *testing.T) {
 			request, err := http.NewRequest(http.MethodGet, url, nil)
 			require.NoError(t, err)
 
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			server.router.ServeHTTP(recorder, request)
 			testCase.checkResponse(t, recorder)
 		})

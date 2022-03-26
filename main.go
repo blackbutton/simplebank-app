@@ -19,7 +19,10 @@ func main() {
 		log.Fatalf("cannot connect to %s fail", config.DBDriver)
 	}
 	store := db.NewStore(conn)
-	server := api.NewServer(store)
+	server, err := api.NewServer(config, store)
+	if err != nil {
+		log.Fatalf("create server fail: %v", err)
+	}
 	log.Printf("server listen %s", config.ServerAddress)
 	if err := server.Start(config.ServerAddress); err != nil {
 		log.Fatal("start server fail: ", err)
