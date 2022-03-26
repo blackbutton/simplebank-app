@@ -30,7 +30,7 @@ func (server *Server) createUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	hashedPassword, err := util.HashPassword(req.Password)
+	hashedPassword, err := util.HashPassword("xyz")
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

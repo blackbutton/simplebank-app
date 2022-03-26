@@ -176,6 +176,20 @@ mockgen --destination db/mock/store.go simplebank-app/db/sqlc Store
 ## 添加Users表
 ## 哈希
 bcrypt 相同加密产生hash会不一致，加入随机salt，但是hash保存有salt
+## JWT
+新的身份验证令牌： PASETO
+Token认证流程
+请求->access_token:JWT, PASETO->Authorization:Bear access_token
+
+JWT：HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload).your-256-bit-secret)
+
+HS256=HMAC + SHA256  
+HMAC: Hash-based Message Authentication Code  
+SHA: Secure Hash Algorithm  
+Asymmetric 非对称签名算法  
+私钥进行签名，公钥进行验证  
+RS | PS | ES  
+JWT 可以篡改加密算法，使用对称加密算法，然后使用公钥签名可以绕过服务器检查
 
 
  
