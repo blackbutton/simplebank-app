@@ -190,6 +190,37 @@ Asymmetric 非对称签名算法
 私钥进行签名，公钥进行验证  
 RS | PS | ES  
 JWT 可以篡改加密算法，使用对称加密算法，然后使用公钥签名可以绕过服务器检查
+## docker构建
+多阶段构建  
+```dockerfile
+# Build stage
+FROM golang:1.18-alpine3.15 AS base
+WORKDIR /app
+COPY . .
+RUN go env -w GOPROXY=https://goproxy.cn,direct && \
+    go build -o main main.go
 
-
- 
+# Run stage
+FROM alpine
+WORKDIR /app
+RUN apk --no-cache add ca-certificates
+COPY --from=base /app/app.env /app/main ./
+EXPOSE 9000
+CMD ["/app/main"]
+```
+RUN和CMD区别  
+RUN运行在构建时，可以是多条命令，每条命令都会创建一个layer，尽可能放在一条执行  
+CMD运行执行时，只能有一条  
+COPY和ADD区别  
+ADD不仅支持本地文件拷贝，而且支持网络支援拷贝  
+## docker网络
+`docker inspect [container]` 查看容器信息
+ ```bash
+ docker network ls 
+ docker network inspect bridge
+ docker network create bank-network
+ docker network connect bank-network postgres
+ docker container inspect 
+ docker run --name simplebank --network bank-network -e GIN_MODE=release -e DB_SOURCE="postgres://root:123456@postgres:5432/simple_bank?sslmode=disable" -d -p 9000:9000 simplebank
+ ```
+一个容器可以连接多个网络，加入同一个网络后，可以通过容器名作为主机名进行查找
