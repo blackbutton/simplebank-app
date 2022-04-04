@@ -223,4 +223,7 @@ ADD不仅支持本地文件拷贝，而且支持网络支援拷贝
  docker container inspect 
  docker run --name simplebank --network bank-network -e GIN_MODE=release -e DB_SOURCE="postgres://root:123456@postgres:5432/simple_bank?sslmode=disable" -d -p 9000:9000 simplebank
  ```
-一个容器可以连接多个网络，加入同一个网络后，可以通过容器名作为主机名进行查找
+一个容器可以连接多个网络，加入同一个网络后，可以通过容器名作为主机名进行查找  
+通过docker-compose启动容器，会自动加入同一个网络中  
+## docker-compose 编排容器时顺序控制
+`https://github.com/mrako/wait-for`

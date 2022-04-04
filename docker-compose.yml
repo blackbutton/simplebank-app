@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=simple_bank
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    labels:
+      - latest
+    ports:
+      - "9000:9000"
+    environment:
+      - DB_SOURCE=postgres://root:123456@postgres:5432/simple_bank?sslmode=disable
+      - GIN_MODE=release
+    depends_on:
+      - postgres
+    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--", "/app/start.sh"]
+    command: ["/app/main"]
